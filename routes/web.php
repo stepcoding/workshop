@@ -1,5 +1,6 @@
 <?php
-
+use App\User;
+use App\Role;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,8 +18,14 @@ Route::get('/', function () {
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('users', function () {
-        return "Hello";
+        return User::find(1)->with('roles')->get();
     });
+});
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles','RoleController');
+    Route::resource('users','UserController');
+    Route::resource('products','ProductController');
 });
 
 Auth::routes();
