@@ -18,12 +18,12 @@ Route::get('/', function () {
 
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('users', function () {
-        return User::find(1)->with('roles')->get();
+        return Auth::user()->roles[0]->name;
     });
 });
 
-Route::group(['middleware' => ['auth']], function() {
-    Route::resource('roles','RoleController');
+Route::group(['middleware' => ['admin']], function() {
+    Route::resource('roles','HealthCheckController');
     Route::resource('users','UserController');
     Route::resource('products','ProductController');
 });
