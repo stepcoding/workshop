@@ -20,6 +20,13 @@ class RedirectIfAuthenticated
         if (Auth::guard($guard)->check()) {
             return redirect('/home');
         }
+        else if (Auth::check() && Auth::user()->role == 'admin') {
+            return redirect('/admin');
+        }
+        elseif (Auth::check() && Auth::user()->role == 'agent') {
+            return redirect('/agent');
+        }
+       
 
         return $next($request);
     }
