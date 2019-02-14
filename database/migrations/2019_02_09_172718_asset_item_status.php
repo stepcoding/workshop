@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AssetCategoryUnit extends Migration
+class AssetItemStatus extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AssetCategoryUnit extends Migration
     public function up()
     {
         //
-        Schema::create('asset_category_unit', function (Blueprint $table) {
+        Schema::create('asset_item_status', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('description');
@@ -29,7 +29,7 @@ class AssetCategoryUnit extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('asset_category_unit');
+       
+        Schema::dropIfExists('asset_item_status');
     }
 }

@@ -21,4 +21,9 @@ class Admin
         }
         return $next($request);
     }
+
+    protected function guard()
+    {
+        return Auth::guard('administrator');
+    }
 }

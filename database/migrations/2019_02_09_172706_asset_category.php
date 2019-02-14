@@ -13,11 +13,11 @@ class AssetCategory extends Migration
      */
     public function up()
     {
-        //
+
         Schema::create('asset_category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->integer('unit_id');
+            $table->string('unit_name');
             $table->boolean('active');
             $table->string('description');
             $table->timestamps();

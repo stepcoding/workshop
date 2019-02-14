@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AssetItemStatus extends Migration
+class CreateSoftdeleteRole extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class AssetItemStatus extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('asset_item_status', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('description');
-            $table->timestamps();
+        Schema::table('roles', function (Blueprint $table) {
+            
+                $table->softDeletes();
         });
     }
 
@@ -29,7 +26,6 @@ class AssetItemStatus extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('asset_item_status');
+        Schema::dropIfExists('softdelete_role');
     }
 }

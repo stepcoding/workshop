@@ -16,16 +16,31 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->prefix('admin')->group(function () {
-    Route::get('users', function () {
-        return Auth::user()->roles[0]->name;
-    });
+Route::get('/product', function () {
+    return view('Product.index');
+})->name('product');
+
+
+Route::get('/user', function () {
+    return view('User.index');
+})->name('user');
+
+Route::get('/report', function () {
+    return view('Report.index');
+})->name('report');
+
+Route::get('/product/create', function () {
+    return view('Category.create');
 });
 
-Route::group(['middleware' => ['admin']], function() {
-    Route::resource('roles','HealthCheckController');
-    Route::resource('users','UserController');
-    Route::resource('products','ProductController');
+Route::get('/product/update', function () {
+    return view('Category.update');
+});
+
+Route::middleware('auth')->prefix('admin')->group(function() {
+    Route::resource('category','CategoryController');
+    Route::resource('user','UserController');
+    Route::resource('role','RoleController');
 });
 
 Auth::routes();
