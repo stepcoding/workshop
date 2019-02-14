@@ -89,8 +89,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        $share = Role::find($id);
-        $share->delete();
+        $role = Role::find($id);
+        $role->delete();
    
         return redirect('/admin/role')->with('success', 'Role has been deleted Successfully');
    }

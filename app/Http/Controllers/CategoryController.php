@@ -13,7 +13,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('Category.index');
+        $Category = Category::get();
+        return view('Category.index')->with('Category',$Category);
     }
 
     /**
@@ -37,12 +38,12 @@ class CategoryController extends Controller
 
         $Category = new Category;
         $Category->name = $request->name;
-        $Category->unit_name = "dd";
-        $Category->active = 1;
-        $Category->description = "dsad";
+        $Category->unit_name = $request->unit_name;
+        $Category->active = $request->active;
+        $Category->description = $request->description;
         $Category->save();
 
-       return $Category;
+        return redirect('admin/category')->with('success', 'Data inserted Successfully');   
     }
 
     /**
@@ -64,7 +65,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        return view('Category.update')->with('id', $id);
+        $Category = Category::find($id);
+        return view('Category.update')->with('Category', $Category);
     }
 
     /**
@@ -76,7 +78,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Category = Category::find($id);
+        $Category->name = $request->get('name');
+        $Category->unit_name = $request->get('unit_name');
+        $Category->active = $request->get('active');
+        $Category->description = $request->get('description');
+        $Category->save();
+  
+        return redirect('/admin/category')->with('success', ' updated');
     }
 
     /**
@@ -87,6 +96,9 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Category = Category::find($id);
+        $Category->delete();
+   
+        return redirect('/admin/role')->with('success', 'Category has been deleted Successfully');
     }
 }
