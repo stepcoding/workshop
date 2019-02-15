@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
@@ -8,20 +7,17 @@
                 <div class="card-header">{{ __('สร้างสิทธิ์ใหม่') }}</div>
 
                 <div class="card-body">
-                        <form method="post" action="{{ route('role.update', $role->id) }}">
-                        @csrf
-                        {{ method_field('PATCH') }}
+                    <form method="post" action="{{ route('role.update', $role->id) }}">
+                        @csrf {{ method_field('PATCH') }}
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อสิทธิ์') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value={{ $role->name }} required autofocus>
-
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback" role="alert">
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value={{ $role->name
+                                }} required autofocus> @if ($errors->has('name'))
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
+                                    </span> @endif
                             </div>
                         </div>
 

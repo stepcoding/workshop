@@ -82,13 +82,22 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Category               = Category::find($id);
+        $Category = Category::find($id);
+
+        if ($request->picture_path != null) {
+            $imageName = time() . '.' . request()->picture_path->getClientOriginalExtension();
+            request()->picture_path->move(public_path('images'), $imageName);
+        } else {
+            $imageName = $Category->picture_path;
+
+        }
+
         $Category->name         = $request->get('name');
         $Category->unit_name    = $request->get('unit_name');
         $Category->active       = $request->get('active');
         $Category->description  = $request->get('description');
-        $Category->picture_path = $request->get('picture_path');
-        $Category->save();
+        $Category->picture_path = $imageName;
+        $Category->update();
 
         return redirect('/admin/category')->with('success', ' updated');
     }
@@ -104,6 +113,6 @@ class CategoryController extends Controller
         $Category = Category::find($id);
         $Category->delete();
 
-        return redirect('/admin/role')->with('success', 'Category has been deleted Successfully');
+        return redirect('/admin/category')->with('success', 'Category has been deleted Successfully');
     }
 }

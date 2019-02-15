@@ -39,10 +39,10 @@
                                 <a class="nav-link" href="{{ url('admin/category') }}">{{ __('จัดการหมวดหมู่ครุภัณฑ์') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('product') }}">{{ __('จัดการครุภัณฑ์') }}</a>
+                                <a class="nav-link" href="{{ url('admin/product') }}">{{ __('จัดการครุภัณฑ์') }}</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('report') }}">{{ __('ระบบรายงาน') }}</a>
+                                <a class="nav-link" href="{{ url('admin/report') }}">{{ __('ระบบรายงาน') }}</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ url('admin/role') }}">{{ __('ระบบจัดการสิทธิ์ผู้ใช้') }}</a>

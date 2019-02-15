@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Category;
+use App\ItemStatus;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -13,8 +16,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $Category = Category::get();
-        return view('Category.index')->with('Category',$Category);
+        $Product = Product::get();
+        return view('Product.index')->with('Product', $Product);
     }
 
     /**
@@ -24,7 +27,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('Product.create');
+        $Category   = Category::get();
+        $ItemStatus = ItemStatus::get();
+        return view('Product.create')->with(compact('Category', 'ItemStatus'));
     }
 
     /**
@@ -36,14 +41,15 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        $Product = new Product;
-        $Product->name = $request->name;
-        $Product->unit_name = $request->unit_name;
-        $Product->active = $request->active;
-        $Product->description = $request->description;
+        $Product                       = new Product;
+        $Product->asset_category_id    = $request->asset_category_id;
+        $Product->barcode              = $request->barcode;
+        $Product->asset_item_status_id = $request->asset_item_status_id;
+        $Product->cost_center_code     = $request->cost_center_code;
+        $Product->paper_description    = $request->paper_description;
         $Product->save();
 
-        return redirect('admin/product')->with('success', 'Data inserted Successfully');   
+        return redirect('admin/product')->with('success', 'Data inserted Successfully');
     }
 
     /**
@@ -65,8 +71,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $Product = Product::find($id);
-        return view('Product.update')->with('Product', $Product);
+        $Product    = Product::find($id);
+        $Category   = Category::get();
+        $ItemStatus = ItemStatus::get();
+        return view('Product.update')->with(compact('Category', 'Product', 'ItemStatus'));
     }
 
     /**
@@ -78,13 +86,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Product = Product::find($id);
-        $Product->name = $request->get('name');
-        $Product->unit_name = $request->get('unit_name');
-        $Product->active = $request->get('active');
-        $Product->description = $request->get('description');
-        $Product->save();
-  
+        $Product                       = Product::find($id);
+        $Product->asset_category_id    = $request->get('asset_category_id');
+        $Product->barcode              = $request->get('barcode');
+        $Product->asset_item_status_id = $request->get('asset_item_status_id');
+        $Product->cost_center_code     = $request->get('cost_center_code');
+        $Product->paper_description    = $request->get('paper_description');
+        $Product->update();
+
         return redirect('/admin/product')->with('success', ' updated');
     }
 
@@ -98,7 +107,7 @@ class ProductController extends Controller
     {
         $Product = Product::find($id);
         $Product->delete();
-   
-        return redirect('/admin/product')->with('success', 'Category has been deleted Successfully');
+
+        return redirect('/admin/product')->with('success', 'Product has been deleted Successfully');
     }
 }
