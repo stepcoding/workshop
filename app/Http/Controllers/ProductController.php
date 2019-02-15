@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Product;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -13,7 +13,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $Category = Category::get();
+        return view('Category.index')->with('Category',$Category);
     }
 
     /**
@@ -23,7 +24,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('Product.create');
     }
 
     /**
@@ -34,7 +35,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $Product = new Product;
+        $Product->name = $request->name;
+        $Product->unit_name = $request->unit_name;
+        $Product->active = $request->active;
+        $Product->description = $request->description;
+        $Product->save();
+
+        return redirect('admin/product')->with('success', 'Data inserted Successfully');   
     }
 
     /**
@@ -56,7 +65,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Product = Product::find($id);
+        return view('Product.update')->with('Product', $Product);
     }
 
     /**
@@ -68,7 +78,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Product = Product::find($id);
+        $Product->name = $request->get('name');
+        $Product->unit_name = $request->get('unit_name');
+        $Product->active = $request->get('active');
+        $Product->description = $request->get('description');
+        $Product->save();
+  
+        return redirect('/admin/product')->with('success', ' updated');
     }
 
     /**
@@ -79,6 +96,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Product = Product::find($id);
+        $Product->delete();
+   
+        return redirect('/admin/product')->with('success', 'Category has been deleted Successfully');
     }
 }

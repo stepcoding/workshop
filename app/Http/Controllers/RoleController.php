@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Role;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class RoleController extends Controller
     public function index()
     {
         $role = Role::get();
-        return view('Role.index')->with('role',$role);
+        return view('Role.index')->with('role', $role);
     }
 
     /**
@@ -39,7 +40,7 @@ class RoleController extends Controller
         $Role->name = $request->name;
         $Role->save();
 
-        return redirect('admin/role')->with('success', 'Data inserted Successfully');   
+        return redirect('admin/role')->with('success', 'Data inserted Successfully');
     }
 
     /**
@@ -77,7 +78,7 @@ class RoleController extends Controller
         $role = Role::find($id);
         $role->name = $request->get('name');
         $role->save();
-  
+
         return redirect('/admin/role')->with('success', ' updated');
     }
 
@@ -91,9 +92,7 @@ class RoleController extends Controller
     {
         $role = Role::find($id);
         $role->delete();
-   
+
         return redirect('/admin/role')->with('success', 'Role has been deleted Successfully');
-   }
+    }
 }
-
-

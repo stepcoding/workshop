@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Category;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $Category = Category::get();
-        return view('Category.index')->with('Category',$Category);
+        return view('Category.index')->with('Category', $Category);
     }
 
     /**
@@ -43,7 +44,7 @@ class CategoryController extends Controller
         $Category->description = $request->description;
         $Category->save();
 
-        return redirect('admin/category')->with('success', 'Data inserted Successfully');   
+        return redirect('admin/category')->with('success', 'Data inserted Successfully');
     }
 
     /**
@@ -84,7 +85,7 @@ class CategoryController extends Controller
         $Category->active = $request->get('active');
         $Category->description = $request->get('description');
         $Category->save();
-  
+
         return redirect('/admin/category')->with('success', ' updated');
     }
 
@@ -98,7 +99,7 @@ class CategoryController extends Controller
     {
         $Category = Category::find($id);
         $Category->delete();
-   
+
         return redirect('/admin/role')->with('success', 'Category has been deleted Successfully');
     }
 }

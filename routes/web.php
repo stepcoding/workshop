@@ -1,6 +1,4 @@
 <?php
-use App\User;
-use App\Role;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,7 +8,7 @@ use App\Role;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -19,7 +17,6 @@ Route::get('/', function () {
 Route::get('/product', function () {
     return view('Product.index');
 })->name('product');
-
 
 Route::get('/user', function () {
     return view('User.index');
@@ -37,14 +34,13 @@ Route::get('/product/update', function () {
     return view('Category.update');
 });
 
-Route::middleware('auth')->prefix('admin')->group(function() {
-    Route::resource('category','CategoryController');
-    Route::resource('user','UserController');
-    Route::resource('role','RoleController');
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::resource('category', 'CategoryController');
+    Route::resource('role', 'RoleController');
+    Route::resource('user', 'UserController');
 });
 
 Auth::routes();
 
 Route::get('/healthcheck', 'HealthCheckController@index')->name('healthcheck')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
-
