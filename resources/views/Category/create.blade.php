@@ -59,19 +59,18 @@
                                 <input type="file" name="image" class="form-control" accept="image/x-png,image/gif,image/jpeg">
                             </div>
                         </div>
-                </div>
 
-                <div class="form-group row mb-0">
-                    <div class="col-md-6 offset-md-4">
-                        <button type="submit" class="btn btn-primary">
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
                                     {{ __('สร้าง') }}
                                 </button>
-                    </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
