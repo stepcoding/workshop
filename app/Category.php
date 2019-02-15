@@ -9,7 +9,7 @@ class Category extends Model
 
     protected $table    = 'asset_category';
     protected $fillable = [
-        'name', 'unit_name', 'active', 'description',
+        'name', 'unit_name', 'active', 'description', 'picture_path',
     ];
 
 }

@@ -26,6 +26,7 @@
                         <th scope="col">รายการ</th>
                         <th scope="col">หน่วย</th>
                         <th scope="col">รายละเอียด</th>
+                        <th scope="col">รูป</th>
                         <th scope="col">สถานะ</th>
                         <th scope="col">จัดการ</th>
                     </tr>
@@ -37,6 +38,7 @@
                         <td>{{$item->name}}</td>
                         <td>{{$item->unit_name}}</td>
                         <td>{{$item->description}}</td>
+                         <td><img src="{{url('images')}}{{'/'}}{{$item->picture_path}}" alt="" width="100px" height="100px"></td>
                         @if ($item->active == 1)
                         <td>เปิดใช้งาน</td>
                         @else

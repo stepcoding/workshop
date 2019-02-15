@@ -36,12 +36,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $imageName = time() . '.' . request()->image->getClientOriginalExtension();
+        request()->image->move(public_path('images'), $imageName);
 
-        $Category = new Category;
-        $Category->name = $request->name;
-        $Category->unit_name = $request->unit_name;
-        $Category->active = $request->active;
-        $Category->description = $request->description;
+        $Category               = new Category;
+        $Category->name         = $request->name;
+        $Category->unit_name    = $request->unit_name;
+        $Category->active       = $request->active;
+        $Category->description  = $request->description;
+        $Category->picture_path = $imageName;
         $Category->save();
 
         return redirect('admin/category')->with('success', 'Data inserted Successfully');
@@ -79,11 +82,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $Category = Category::find($id);
-        $Category->name = $request->get('name');
-        $Category->unit_name = $request->get('unit_name');
-        $Category->active = $request->get('active');
-        $Category->description = $request->get('description');
+        $Category               = Category::find($id);
+        $Category->name         = $request->get('name');
+        $Category->unit_name    = $request->get('unit_name');
+        $Category->active       = $request->get('active');
+        $Category->description  = $request->get('description');
+        $Category->picture_path = $request->get('picture_path');
         $Category->save();
 
         return redirect('/admin/category')->with('success', ' updated');

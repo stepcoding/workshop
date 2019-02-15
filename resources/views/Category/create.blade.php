@@ -7,7 +7,7 @@
                 <div class="card-header">{{ __('สร้างหมวดหมู่ครุภัณฑ์ใหม่') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('admin/category') }}">
+                    <form method="POST" action="{{ url('admin/category') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -53,18 +53,25 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('สร้าง') }}
-                                </button>
+                        <div class="form-group row">
+                            <label for="active" class="col-md-4 col-form-label text-md-right">{{ __('รูป') }}</label>
+                            <div class="col-md-6">
+                                <input type="file" name="image" class="form-control" accept="image/x-png,image/gif,image/jpeg">
                             </div>
                         </div>
-                    </form>
                 </div>
+
+                <div class="form-group row mb-0">
+                    <div class="col-md-6 offset-md-4">
+                        <button type="submit" class="btn btn-primary">
+                                    {{ __('สร้าง') }}
+                                </button>
+                    </div>
+                </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
