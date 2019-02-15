@@ -29,3 +29,20 @@ Auth::routes();
 
 Route::get('/healthcheck', 'HealthCheckController@index')->name('healthcheck')->middleware('auth');
 Route::get('/home', 'HomeController@index')->name('home');
+
+/// for debug
+Route::get('db', function () {
+    if (DB::connection()->getDatabaseName()) {
+        return "Yes! successfully connected to the DB: " . DB::connection()->getDatabaseName();
+    } else {
+        return 'Connection False !!';
+    }
+});
+
+// middleware Auth::user() ;
+Route::get('user-middleware', function () {
+    //
+
+    return Auth::user()->with('roles')->get();
+
+})->middleware('auth');
