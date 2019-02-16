@@ -29,6 +29,7 @@
                         <th scope="col">รูป</th>
                         <th scope="col">สถานะ</th>
                         <th scope="col">จัดการ</th>
+                        <th scope="col">ดูครุภัณฑ์</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +58,7 @@
                                 </div>
                             </div>
                         </td>
+                        <td> <a href="{{url('/admin/product/orderby/'.$item->id)}}" title="" class="edit"> View<i class="fa fa-edit"></i></a></td>
                     </tr>
                     <tr>
                         @endforeach

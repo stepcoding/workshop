@@ -20,6 +20,11 @@ class ProductController extends Controller
         return view('Product.index')->with('Product', $Product);
     }
 
+    public function orderby($id = 0)
+    {
+        $Product = Product::where('asset_category_id', $id)->get();
+        return view('Product.index')->with('Product', $Product);
+    }
     /**
      * Show the form for creating a new resource.
      *

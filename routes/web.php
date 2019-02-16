@@ -23,6 +23,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('role', 'RoleController');
     Route::resource('user', 'UserController');
     Route::resource('product', 'ProductController');
+    Route::get('product/orderby/{id}', 'ProductController@orderby');
 });
 
 Auth::routes();
